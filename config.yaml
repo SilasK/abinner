@@ -1,3 +1,19 @@
-# This file should contain everything to configure the workflow on a global scale.
-# In case of sample based data, it should be complemented by a samples.tsv file that contains
-# one row per sample. It can be parsed easily via pandas.
+BINNING_BAM: "{sample}/sequence_alignment/{sample}.bam"
+BINNING_CONTIGS: "{sample}/{sample}_contigs.fasta"
+BB_COVERAGE_FILE : "{sample}/assembly/contig_stats/postfilter_coverage_stats.txt"
+
+
+
+binner: ['metabat','concoct','maxbin']
+binning_min_contig_length: 1000
+metabat:
+  sensitivity: sensitive
+
+concoct:
+  Nexpected_clusters: 200
+  read_length: 100
+  Niterations: 500
+
+maxbin:
+  max_iteration: 50
+  prob_threshold: 0.9
