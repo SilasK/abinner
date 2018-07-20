@@ -49,7 +49,7 @@ rule run_concoct:
             --converge_out \
             --iterations {params.niterations}
         """
-localrules: get_cluster_attribution_concoct
+localrules: concoct
 
 rule concoct:
     input:
@@ -90,13 +90,13 @@ rule metabat:
     output:
         "{sample}/binning/metabat/cluster_attribution.tsv",
     params:
-          sensitivity = 500 if config['binning_sensitivity'] == 'sensitive' else 200,
+          sensitivity = 500 if config['metabat']['sensitivity'] == 'sensitive' else 200,
           min_contig_len = config["binning_min_contig_length"],
           output_prefix = "{sample}/binning/bins/bin"
     benchmark:
         "logs/benchmarks/binning/metabat/{sample}.txt"
     log:
-        "logs/binning/metabat/run_metabat.txt"
+        "logs/binning/metabat/{sample}.txt"
     conda:
         "%s/metabat.yaml" % CONDAENV
     threads:
@@ -168,7 +168,7 @@ rule maxbin:
     log:
         "{sample}/logs/maxbin2.log"
     conda:
-        "%s/optional_genome_binning.yaml" % CONDAENV
+        "%s/maxbin.yaml" % CONDAENV
     threads:
         config["threads"]
     shell:

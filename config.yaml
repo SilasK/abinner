@@ -2,7 +2,7 @@ BINNING_BAM: "{sample}/sequence_alignment/{sample}.bam"
 BINNING_CONTIGS: "{sample}/{sample}_contigs.fasta"
 BB_COVERAGE_FILE : "{sample}/assembly/contig_stats/postfilter_coverage_stats.txt"
 
-
+samples: ['S1']
 
 binner: ['metabat','concoct','maxbin']
 binning_min_contig_length: 1000
@@ -17,3 +17,6 @@ concoct:
 maxbin:
   max_iteration: 50
   prob_threshold: 0.9
+
+java_mem: 50
+threads: 8
